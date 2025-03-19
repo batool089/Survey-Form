@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استبيان</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .question, .rating {
+            background-color: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        .button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #6a0dad;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #5a009d;
+        }
+        .stars span {
+            font-size: 30px;
+            cursor: pointer;
+            color: gray;
+        }
+        .stars span:hover, .stars span.active {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <!-- أسئلة الاستبيان -->
+    <div id="question1" class="question">
+        <h2>1- هل لبى التطبيق جميع الأهداف وكان سهل الاستخدام؟</h2>
+        <button class="button" onclick="showNext('question2')">نعم، كان سهل جداً</button>
+        <button class="button" onclick="showNext('question2')">كان صعب ومعقد</button>
+    </div>
+
+    <div id="question2" class="question">
+        <h2>2- هل كانت استجابة التطبيق سريعة؟</h2>
+        <button class="button" onclick="showNext('question3')">نعم، كانت سريعة</button>
+        <button class="button" onclick="showNext('question3')">لا، كانت بطيئة</button>
+    </div>
+
+    <div id="question3" class="question">
+        <h2>3- هل كان تصميم التطبيق جذابًا وسهلًا؟</h2>
+        <button class="button" onclick="showNext('question4')">نعم، كان جذابًا وسهلًا</button>
+        <button class="button" onclick="showNext('question4')">لا، كان غير منظم</button>
+    </div>
+
+    <div id="question4" class="question">
+        <h2>4- هل كانت عملية تحميل الصور والفيديوهات سهلة؟</h2>
+        <button class="button" onclick="showNext('question5')">نعم، كانت سهلة</button>
+        <button class="button" onclick="showNext('question5')">لا، كانت معقدة</button>
+    </div>
+
+    <div id="question5" class="question">
+        <h2>5- هل كان التطبيق يتجاوب بشكل صحيح؟</h2>
+        <button class="button" onclick="showNext('question6')">نعم، كان يتجاوب بشكل ممتاز</button>
+        <button class="button" onclick="showNext('question6')">لا، كان بطيئاً في الاستجابة</button>
+    </div>
+
+    <div id="question6" class="question">
+        <h2>6- هل واجهت أي مشاكل أثناء الاستخدام؟</h2>
+        <button class="button" onclick="showNext('question7')">نعم، واجهت مشاكل</button>
+        <button class="button" onclick="showNext('question7')">لا، لم أواجه مشاكل</button>
+    </div>
+
+    <div id="question7" class="question">
+        <h2>7- هل تنصح باستخدام التطبيق للآخرين؟</h2>
+        <button class="button" onclick="showNext('question8')">نعم، أنصح به</button>
+        <button class="button" onclick="showNext('question8')">لا، لا أنصح به</button>
+    </div>
+
+    <div id="question8" class="question">
+        <h2>8- هل لديك اقتراحات لتحسين التطبيق؟</h2>
+        <button class="button" onclick="showNext('rating')">لا، كل شيء جيد</button>
+        <button class="button" onclick="showNext('rating')">نعم، لدي اقتراحات</button>
+    </div>
+
+    <!-- صفحة التقييم -->
+    <div id="rating" class="rating">
+        <h2>يرجى تقييم التطبيق:</h2>
+        <div class="stars">
+            <span onclick="rate(1)">★</span>
+            <span onclick="rate(2)">★</span>
+            <span onclick="rate(3)">★</span>
+            <span onclick="rate(4)">★</span>
+            <span onclick="rate(5)">★</span>
+        </div>
+        <div id="thankYou" style="display: none; margin-top: 20px;">شكرًا لتقييمك!</div>
+    </div>
+
+    <script>
+        // إظهار السؤال الأول عند تحميل الصفحة
+        document.getElementById("question1").style.display = "block";
+        
+        function showNext(nextId) {
+            const current = document.querySelector(".question:not([style*='display: none'])");
+            if (current) current.style.display = "none";
+            document.getElementById(nextId).style.display = "block";
+        }
+
+        function rate(stars) {
+            const starsElements = document.querySelectorAll(".stars span");
+            starsElements.forEach((star, index) => {
+                if (index < stars) {
+                    star.classList.add("active");
+                } else {
+                    star.classList.remove("active");
+                }
+            });
+            document.getElementById("thankYou").style.display = "block";
+        }
+    </script>
+</body>
+</html>
